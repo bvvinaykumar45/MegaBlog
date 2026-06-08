@@ -1,9 +1,10 @@
-import { Client, Query, TablesDB } from "appwrite";
+import { Client, ID, Query, Storage, TablesDB } from "appwrite";
 import config from "../config/config";
 
 class Service {
   client = new Client();
   tablesDB;
+  storage;
 
   constructor() {
     this.client
@@ -11,8 +12,10 @@ class Service {
       .setProject(config.appwriteProjectId);
 
     this.tablesDB = new TablesDB(this.client);
+    this.storage = new Storage(this.client);
   }
 
+  // TableDB services
   async createArticle({ title, slug, content, featuredImage, status, userId }) {
     try {
       return await this.tablesDB.createRow({
@@ -88,6 +91,40 @@ class Service {
       console.error(`Service :: getArticles :: error`, error);
       return false;
     }
+  }
+
+  // Storage Services
+  async uploadFile(file) {
+    try {
+      await this.storage.createFile({
+        bucketId: config.appwriteBucketId,
+        fileId: ID.unique(),
+        file: file,
+      });
+    } catch (error) {
+      console.error(`Service :: uploadFile :: error`, error);
+      return false;
+    }
+  }
+
+  async deleteFile(fileId) {
+    try {
+      await this.storage.deleteFile({
+        bucketId: config.appwriteBucketId,
+        fileId: fileId,
+      });
+      return true;
+    } catch (error) {
+      console.error(`Service :: deleteFile :: error`, error);
+      return false;
+    }
+  }
+
+  getFilePreview(fileId) {
+    return this.storage.getFilePreview({
+      bucketId: config.appwriteBucketId,
+      fileId: fileId,
+    });
   }
 }
 
