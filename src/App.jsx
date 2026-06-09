@@ -1,9 +1,36 @@
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { Header, Footer } from "./components";
+import authService from "./appwrite/auth";
+import { login, logout } from "./store/authSlice";
+
 function App() {
-  return (
-    <div className="w-full h-screen bg-slate-400 flex flex-wrap items-center justify-center">
-      Mega Blog App with Appwrite
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    authService
+      .getCurrentUser()
+      .then((userData) => {
+        if (userData) {
+          dispatch(login({ userData }));
+        } else {
+          dispatch(logout());
+        }
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  return !loading ? (
+    <div className="w-full h-screen bg-slate-400 flex flex-wrap justify-center">
+      <div className="w-full text-center">
+        <Header />
+        <main>TODO: {/* <Outlet /> */}</main>
+        <Footer />
+      </div>
     </div>
-  );
+  ) : null;
 }
 
 export default App;
