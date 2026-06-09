@@ -1,0 +1,70 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1200 700"
+  fill="none"
+>
+  <defs>
+    <style>
+      .monogram {
+        font-family: "Kaisei Decol", serif;
+        font-size: 320px;
+        fill: rgba(17, 24, 39, 0.18);
+      }
+
+      .wordmark {
+        font-family: "Carattere", cursive;
+        font-size: 150px;
+        fill: #111827;
+      }
+
+      .tagline {
+        font-family: "Afacad", sans-serif;
+        font-size: 42px;
+        letter-spacing: 3px;
+        fill: #616774;
+      }
+
+      .rule {
+        stroke: #111827;
+        stroke-width: 3;
+      }
+    </style>
+  </defs>
+
+  <!-- MB -->
+  <text
+    x="600"
+    y="340"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    class="monogram"
+  >
+    MB
+  </text>
+
+  <!-- Decorative Rules -->
+  <line x1="150" y1="350" x2="260" y2="350" class="rule" />
+  <line x1="940" y1="350" x2="1050" y2="350" class="rule" />
+
+  <!-- Mega Blog -->
+  <text
+    x="600"
+    y="318"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    class="wordmark"
+  >
+    Mega Blog
+  </text>
+
+  <!-- Tagline -->
+  <text
+    x="600"
+    y="500"
+    text-anchor="middle"
+    class="tagline"
+  >
+    Read. Code. Repeat.
+  </text>
+
+</svg>
