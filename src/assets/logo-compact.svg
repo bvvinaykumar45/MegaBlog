@@ -26,7 +26,7 @@
 
   <text
     x="600"
-    y="165"
+    y="195"
     text-anchor="middle"
     dominant-baseline="middle"
     class="monogram"
@@ -34,12 +34,12 @@
     MB
   </text>
 
-  <line x1="200" y1="175" x2="270" y2="175" class="rule" />
-  <line x1="940" y1="175" x2="1010" y2="175" class="rule" />
+  <line x1="190" y1="200" x2="265" y2="200" class="rule" />
+  <line x1="940" y1="200" x2="1020" y2="200" class="rule" />
 
   <text
     x="600"
-    y="145"
+    y="170"
     text-anchor="middle"
     dominant-baseline="middle"
     class="wordmark"
