@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -10,13 +10,18 @@ import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
 
 function SignUp() {
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { handleSubmit, register } = useForm();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting },
+    setError,
+  } = useForm();
 
   const create = async (data) => {
-    setError("");
+    // setError("");
     try {
       const session = await authService.createAccount(data);
       if (session) {
@@ -27,7 +32,7 @@ function SignUp() {
         }
       }
     } catch (error) {
-      setError(error.message);
+      setError("root", { type: "server", message: error.message });
     }
   };
   return (
@@ -50,38 +55,61 @@ function SignUp() {
             Sign In
           </Link>
         </p>
-        {error && <p className="mt-8 text-red-600 text-center">{error}</p>}
+        {errors.root && (
+          <p className="mt-8 text-red-600 text-center">{errors.root.message}</p>
+        )}
         <form
           className="mt-8 flex flex-col gap-4 items-center"
           onSubmit={handleSubmit(create)}
         >
-          <Input
-            label="Name: "
-            type="name"
-            placeholder="Enter your name"
-            {...register("name", { required: true })}
-          />
-          <Input
-            label="Email: "
-            type="text"
-            placeholder="Enter your email"
-            {...register("email", {
-              required: true,
-              validate: {
-                matchPattern: (value) =>
-                  /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
-                  "Email address must be a valid address",
-              },
-            })}
-          />
-          <Input
-            label="Password: "
-            type="password"
-            placeholder="Enter your password"
-            {...register("password", { required: true })}
-          />
-          <Button type="submit" className="w-full">
-            Sign Up
+          <div className="flex flex-col items-center gap-1 w-full">
+            <Input
+              label="Name: "
+              type="text"
+              placeholder="Enter your name"
+              {...register("name", { required: "name is required" })}
+            />
+            {errors.name && (
+              <p className="text-md text-red-500 text-center">
+                {errors.name.message}
+              </p>
+            )}
+          </div>
+          <div className="flex flex-col items-center gap-1 w-full">
+            <Input
+              label="Email: "
+              type="text"
+              placeholder="Enter your email"
+              {...register("email", {
+                required: "email is required",
+                validate: {
+                  matchPattern: (value) =>
+                    /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
+                    "Email address must be a valid address",
+                },
+              })}
+            />
+            {errors.email && (
+              <p className="text-md text-red-500 text-center">
+                {errors.email.message}
+              </p>
+            )}
+          </div>
+          <div className="flex flex-col items-center gap-1 w-full">
+            <Input
+              label="Password: "
+              type="password"
+              placeholder="Enter your password"
+              {...register("password", { required: "password is required" })}
+            />
+            {errors.password && (
+              <p className="text-md text-red-500 text-center">
+                {errors.password.message}
+              </p>
+            )}
+          </div>
+          <Button type="submit" className="w-full" disabled={isSubmitting}>
+            {isSubmitting ? "Processing..." : "Sign Up"}
           </Button>
         </form>
       </div>
