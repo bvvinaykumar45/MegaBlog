@@ -24,14 +24,12 @@ function App() {
   }, []);
 
   return !loading ? (
-    <div className="w-full h-screen bg-gray-400 flex flex-wrap justify-center">
-      <div className="w-full text-center">
-        <Header />
-        <main>
-          <Outlet />
-        </main>
-        <Footer />
-      </div>
+    <div className="w-full min-h-screen bg-gray-400 flex flex-col">
+      <Header />
+      <main className="flex flex-1 w-full">
+        <Outlet />
+      </main>
+      <Footer />
     </div>
   ) : null;
 }
