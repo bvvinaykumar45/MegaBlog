@@ -5,11 +5,20 @@ import {
 } from "react-router";
 
 import App from "./App";
-import { Home } from "./pages";
+import { Home, LoginPage } from "./pages";
+import { AuthLayout } from "./components/layout";
 
 const routes = createRoutesFromElements(
   <Route path="/" Component={App}>
     <Route index Component={Home} />
+    <Route
+      path="/loging"
+      element={
+        <AuthLayout>
+          <LoginPage />
+        </AuthLayout>
+      }
+    />
   </Route>
 );
 
