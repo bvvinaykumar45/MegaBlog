@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { Outlet } from "react-router";
 
-import { Header, Footer } from "./components";
+import { Header, Footer } from "./components/layout";
 import authService from "./appwrite/auth";
-import { login, logout } from "./store/authSlice";
+import { login, logout } from "./features/auth/authSlice";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -23,10 +24,12 @@ function App() {
   }, []);
 
   return !loading ? (
-    <div className="w-full h-screen bg-slate-400 flex flex-wrap justify-center">
+    <div className="w-full h-screen bg-gray-400 flex flex-wrap justify-center">
       <div className="w-full text-center">
         <Header />
-        <main>TODO: {/* <Outlet /> */}</main>
+        <main>
+          <Outlet />
+        </main>
         <Footer />
       </div>
     </div>
