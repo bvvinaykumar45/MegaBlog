@@ -5,7 +5,7 @@ import {
 } from "react-router";
 
 import App from "./App";
-import { Home, LoginPage, SignupPage } from "./pages";
+import { AddPostPage, Home, LoginPage, SignupPage } from "./pages";
 import { AuthLayout } from "./components/layout";
 
 const routes = createRoutesFromElements(
@@ -24,6 +24,14 @@ const routes = createRoutesFromElements(
       element={
         <AuthLayout>
           <SignupPage />
+        </AuthLayout>
+      }
+    />
+    <Route
+      path="/add-post"
+      element={
+        <AuthLayout>
+          <AddPostPage />
         </AuthLayout>
       }
     />
