@@ -5,7 +5,13 @@ import {
 } from "react-router";
 
 import App from "./App";
-import { AddPostPage, Home, LoginPage, SignupPage } from "./pages";
+import {
+  AddPostPage,
+  EditPostPage,
+  Home,
+  LoginPage,
+  SignupPage,
+} from "./pages";
 import { AuthLayout } from "./components/layout";
 
 const routes = createRoutesFromElements(
@@ -30,8 +36,16 @@ const routes = createRoutesFromElements(
     <Route
       path="/add-post"
       element={
-        <AuthLayout>
+        <AuthLayout isProtected={true}>
           <AddPostPage />
+        </AuthLayout>
+      }
+    />
+    <Route
+      path="/edit-post/:slug"
+      element={
+        <AuthLayout isProtected={true}>
+          <EditPostPage />
         </AuthLayout>
       }
     />
