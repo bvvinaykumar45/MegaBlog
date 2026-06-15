@@ -12,6 +12,7 @@ import {
   Home,
   LoginPage,
   SignupPage,
+  ViewPostPage,
 } from "./pages";
 import { AuthLayout } from "./components/layout";
 
@@ -55,6 +56,14 @@ const routes = createRoutesFromElements(
       element={
         <AuthLayout isProtected>
           <EditPostPage />
+        </AuthLayout>
+      }
+    />
+    <Route
+      path="/post/:slug"
+      element={
+        <AuthLayout isProtected>
+          <ViewPostPage />
         </AuthLayout>
       }
     />
