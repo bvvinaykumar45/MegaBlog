@@ -7,6 +7,7 @@ import {
 import App from "./App";
 import {
   AddPostPage,
+  AllPostsPage,
   EditPostPage,
   Home,
   LoginPage,
@@ -36,15 +37,23 @@ const routes = createRoutesFromElements(
     <Route
       path="/add-post"
       element={
-        <AuthLayout isProtected={true}>
+        <AuthLayout isProtected>
           <AddPostPage />
+        </AuthLayout>
+      }
+    />
+    <Route
+      path="/all-posts"
+      element={
+        <AuthLayout isProtected>
+          <AllPostsPage />
         </AuthLayout>
       }
     />
     <Route
       path="/edit-post/:slug"
       element={
-        <AuthLayout isProtected={true}>
+        <AuthLayout isProtected>
           <EditPostPage />
         </AuthLayout>
       }
