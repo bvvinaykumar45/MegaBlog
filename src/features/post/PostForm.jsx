@@ -28,7 +28,7 @@ function PostForm({ post }) {
       return value
         .trim()
         .toLowerCase()
-        .replace(/^[a-zA-Z\d]+/g, "-")
+        .replace(/[^a-z\d]+/g, "-")
         .replace(/\s/g, "-");
     }
   }, []);
@@ -45,8 +45,8 @@ function PostForm({ post }) {
 
   const submit = async (data) => {
     if (post) {
-      const file = data.file[0]
-        ? await appwriteService.uploadFile(data.file[0])
+      const file = data.image[0]
+        ? await appwriteService.uploadFile(data.image[0])
         : null;
       if (file) {
         appwriteService.deleteFile(post.featuredImage);
@@ -60,8 +60,8 @@ function PostForm({ post }) {
         navigate(`/post/${dbPost.$id}`);
       }
     } else {
-      const file = data.file[0]
-        ? await appwriteService.uploadFile(data.file[0])
+      const file = data.image[0]
+        ? await appwriteService.uploadFile(data.image[0])
         : null;
       if (file) {
         const fileId = file.$id;

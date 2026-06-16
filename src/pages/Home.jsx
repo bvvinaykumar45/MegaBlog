@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router";
 
 import appwriteService from "../appwrite/services";
-import Container from "../components/layout/Container";
+import { Container } from "../components/layout";
 import PostCard from "../components/shared/PostCard";
 
 function Home() {
@@ -43,7 +43,7 @@ function Home() {
   } else {
     return (
       <Container>
-        <div className="flex flex-wrap w-full gap-3">
+        <div className="flex flex-wrap w-full gap-3 p-8">
           {posts.map((post) => (
             <div key={post.$id} className="p-2 w-1/4">
               <PostCard {...post} />

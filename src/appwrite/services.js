@@ -96,7 +96,7 @@ class Service {
   // Storage Services
   async uploadFile(file) {
     try {
-      await this.storage.createFile({
+      return await this.storage.createFile({
         bucketId: config.appwriteBucketId,
         fileId: ID.unique(),
         file: file,
@@ -121,10 +121,14 @@ class Service {
   }
 
   getFilePreview(fileId) {
-    return this.storage.getFilePreview({
-      bucketId: config.appwriteBucketId,
-      fileId: fileId,
-    });
+    try {
+      return this.storage.getFileDownload({
+        bucketId: config.appwriteBucketId,
+        fileId: fileId,
+      });
+    } catch (error) {
+      console.error(`Service :: getFilePreview :: error`, error);
+    }
   }
 }
 

@@ -13,7 +13,11 @@ function AuthLayout({ isProtected, children }) {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoading(false);
   }, [authStatus, isProtected, navigate]);
-  return loading ? <h1>Loading...</h1> : <>{children}</>;
+  return loading ? (
+    <h1 className="text-center p-20 text-2xl">Loading...</h1>
+  ) : (
+    <>{children}</>
+  );
 }
 
 export default AuthLayout;
